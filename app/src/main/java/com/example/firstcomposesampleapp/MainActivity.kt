@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
@@ -22,9 +23,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.onError
+                    color = MaterialTheme.colorScheme.background
                 ) {
-                    MessageCard(message = "Maadar...")
+                    MessageCard(message = Message("Ahmad", "Salam"))
                 }
             }
         }
@@ -32,23 +33,28 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MessageCard(modifier: Modifier = Modifier, message: String) {
-    Text(
-        modifier = modifier.fillMaxWidth(),
-        text = "Salam $message"
-    )
+fun MessageCard(modifier: Modifier = Modifier, message: Message) {
+    Column(modifier = modifier) {
+        Text(
+            modifier = modifier.fillMaxWidth(),
+            text = "${message.author}:"
+        )
+        Text(
+            modifier = modifier.fillMaxWidth(),
+            text = message.message
+        )
+    }
 }
 
-@Preview("Light Mode", showSystemUi = false, showBackground = true)
+@Preview("Light Mode", showBackground = true)
 @Preview(
     "Dark Mode",
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true,
-    backgroundColor = 0xFFF0EAE2, showSystemUi = false
 )
 @Composable
 fun MessageCardPreview() {
     FirstComposeSampleAppTheme {
-        MessageCard(message = "Maadar ....")
+        MessageCard(message = Message("Ahmad", "Salam"))
     }
 }
