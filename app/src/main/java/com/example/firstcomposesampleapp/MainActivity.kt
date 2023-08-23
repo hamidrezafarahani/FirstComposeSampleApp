@@ -1,9 +1,11 @@
 package com.example.firstcomposesampleapp
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -20,9 +22,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.onError
                 ) {
-                    Greeting("Android")
+                    MessageCard(message = "Maadar...")
                 }
             }
         }
@@ -30,17 +32,23 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun MessageCard(modifier: Modifier = Modifier, message: String) {
     Text(
-        text = "Hello $name!",
-        modifier = modifier
+        modifier = modifier.fillMaxWidth(),
+        text = "Salam $message"
     )
 }
 
-@Preview(showBackground = true)
+@Preview("Light Mode", showSystemUi = false, showBackground = true)
+@Preview(
+    "Dark Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    backgroundColor = 0xFFF0EAE2, showSystemUi = false
+)
 @Composable
-fun GreetingPreview() {
+fun MessageCardPreview() {
     FirstComposeSampleAppTheme {
-        Greeting("Android")
+        MessageCard(message = "Maadar ....")
     }
 }
