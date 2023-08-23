@@ -68,10 +68,13 @@ fun MessageCard(modifier: Modifier = Modifier, message: Message) {
 
             Spacer(modifier = modifier.height(4.dp))
 
-            Text(
-                modifier = modifier.fillMaxWidth(),
-                text = message.message
-            )
+            Surface(shape = MaterialTheme.shapes.medium, shadowElevation = 1.dp) {
+                Text(
+                    modifier = modifier.padding(all = 4.dp),
+                    style = MaterialTheme.typography.bodyMedium,
+                    text = message.message
+                )
+            }
         }
     }
 }
